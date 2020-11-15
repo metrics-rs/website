@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Metrics - high-performance, protocol-agnostic instrumentation.</title>
+        <script src="/assets/js/main.js"></script>
+        <link rel="stylesheet" href="/assets/css/foundation.min.css">
+        <link rel="stylesheet" href="/assets/css/main.css">
+    </head>
+    <body>
+        <div class="grid-container full">
+            <div class="grid-x grid-padding-x">
+                <div class="cell bg-white">
+                    <div class="grid-container">
+                        <div class="grid-x grid-margin-x">
+                            <div class="cell small-offset-1 small-10 logo">
+                                <picture class="show-for-medium">
+                                    <source srcset="/assets/img/logo-subhead.webp" type="image/webp">
+                                    <source srcset="/assets/img/logo-subhead.png" type="image/png">
+                                    <img src="/assets/img/logo-subhead.png" alt="Metrics - high-performance, protocol-agnostic instrumentation">
+                                </picture>
+                                <picture class="hide-for-medium">
+                                    <source srcset="/assets/img/logo.webp" type="image/webp">
+                                    <source srcset="/assets/img/logo.png" type="image/png">
+                                    <img src="/assets/img/logo.png" alt="Metrics - high-performance, protocol-agnostic instrumentation">
+                                </picture>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cell bg-gradient content">
+                    <div class="grid-container">
+                        <div class="cell subhead">
+                            <p class="lead">Metrics is a batteries-included instrumentation ecosystem for
+                            Rust, allowing you to quickly and easily instrument your libraries
+                            and applications.</p>
+                        </div>
+                        <div class="cell subhead-break"></div>
+                    </div>
+                    <div class="grid-container bg-rings primary">
+                        <div class="grid-x grid-margin-x">
+                            <div class="cell description">
+                                <h2 class="thick">High Performance</h2>
+                                <p class="lead">With a pay-for-what-you-use approach, Metrics has nearly zero
+                                cost when not in use, and is fully optimized for the lowest possible
+                                overhead when enabled.  Confidently instrument your application
+                                without fear of production impact.</p>
+                            </div>
+                            <div class="cell description">
+                                <h2 class="thick">Pragmatic Design</h2>
+                                <p class="lead">Instrumentation should be easy to integrate <em>and</em> easy to use.
+                                Metrics provides an opinionated API to help you avoid wasting time
+                                when getting started, without locking you into a specific monitoring
+                                system or time-series database.  Don't waste time sorting through
+                                different instrumentation libraries, comparing feature sets and compatibility.</p>
+                            </div>
+                            <div class="cell description">
+                                <h2 class="thick">Working Together</h2>
+                                <p class="lead">Metrics provides a common framework for instrumentation.  Using a
+                                Metrics-instrumented library in your application?  Automatically get
+                                access to those metrics with no extrra configuration.  The more
+                                libraries that use Metrics, the more richer the instrument gets for
+                                the entire Rust ecosystem.  Use an instrumentation library that
+                                rewards collaboration.</p>
+                            </div>
+                            <div class="cell description standout">
+                                <h2 class="thin text-center">See how it easy it is to get started:</h2>
+                                <div class="terminal space shadow">
+                                    <div class="top" aria-hidden="true">
+                                        <div class="flex-shrink">
+                                            <span class="circle red"></span>
+                                            <span class="circle yellow"></span>
+                                            <span class="circle green"></span>
+                                        </div>
+                                        <div class="flex-grow text-center">bash -- 70x32</div>
+                                    </div>
+                                    <div class="body">
+                                        <p class="show-for-sr">Here is a code snippet to show how to use the metrics crate both as a library and application author.</p>
+                                        <pre>
+<code><div class="editor"><span unselectable="on" class="lineno">1  </span><span class="keyword">use</span> <span class="type">std</span>::<span class="type">time</span>::<span class="type">Instant</span>;
+<span unselectable="on" class="lineno">2  </span><span class="keyword">use</span> <span class="type">metrics</span>::{<span class="ident">increment</span>, <span class="ident">histogram</span>};
+<span unselectable="on" class="lineno">3  </span><span class="keyword">use</span> <span class="type">metrics_exporter_prometheus</span>::<span class="type">PrometheusBuilder</span>;
+<span unselectable="on" class="lineno">4  </span>
+<span unselectable="on" class="lineno">5  </span><span class="comment">// It's easy to instrument code:</span>
+<span unselectable="on" class="lineno">6  </span><span class="keyword">fn</span> <span class="ident">process_request</span>() {
+<span unselectable="on" class="lineno">7  </span>   <span class="ident">increment!</span>(<span class="string">"requests_received"</span>);
+<span unselectable="on" class="lineno">8  </span>
+<span unselectable="on" class="lineno">9  </span>   <span class="keyword">let</span> <span class="variable">start</span> = <span class="type">Instant</span>::<span class="ident">now</span>();
+<span unselectable="on" class="lineno">10 </span>
+<span unselectable="on" class="lineno">11 </span>  <span class="comment">// Do some work here...</span>
+<span unselectable="on" class="lineno">12 </span>
+<span unselectable="on" class="lineno">13 </span>  <span class="ident">histogram!</span>(<span class="string">"process_request_duration"</span>, <span class="variable">start</span>.<span class="ident">elapsed</span>());
+<span unselectable="on" class="lineno">14 </span>}
+<span unselectable="on" class="lineno">15 </span>
+<span unselectable="on" class="lineno">16 </span><span class="comment">// And it's easy to start collecting metrics:</span>
+<span unselectable="on" class="lineno">17 </span><span class="keyword">fn</span> <span class="ident">main</span>() {
+<span unselectable="on" class="lineno">18 </span>   <span class="comment">// Run a Prometheus scrape endpoint on 127.0.0.1:9000.</span>
+<span unselectable="on" class="lineno">19 </span>   <span class="keyword">let</span> <span class="variable">_</span> = <span class="type">PrometheusBuilder</span>::<span class="ident">new</span>()
+<span unselectable="on" class="lineno">20 </span>       .<span class="ident">install</span>()
+<span unselectable="on" class="lineno">21 </span>       .<span class="ident">expect</span>(<span class="string">"failed to install prometheus exporter"</span>);
+<span unselectable="on" class="lineno">22 </span>}
+<span unselectable="on" class="lineno">23 </span><div class="cursor"> </div></div></code><div class="status-line">
+    <div class="segment flex-shrink mode hi-contrast-bg">NORMAL</div>
+    <div class="flexible flex-grow"><div class="segment">src/main.rs</div><div class="segment">rust</div></div>
+    <div class="segment flex-shrink lo-contrast-bg">utf-8[unix]</div>
+    <div class="segment flex-shrink hi-contrast-bg">100% ☰   23/23 ln  :  1</div>
+</div></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cell description standout">
+                                <div class="grid-x grid-margin-x">
+                                    <div class="cell auto text-center">
+                                        <h2 class="thin text-center">Ready to try metrics?</h2>
+                                        <div class="docs">
+                                            <a class="h3 big-link" href="https://docs.rs/metrics">https://docs.rs/metrics</a>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="cell auto text-center">
+                                        <h2 class="thin">Want to get in touch?</h2>
+                                        <div class="flexible social">
+                                            <p class="h3">hello@metrics.rs</p>
+                                            <a href="https://github.com/metrics-rs/metrics" target="_blank">
+                                                <img class="svg" src="/assets/img/github.svg" alt="Check us out on GitHub!">
+                                            </a>
+                                            <a href="https://discord.gg/eTwKyY9" target="_blank">
+                                                <img class="svg" src="/assets/img/discord.svg" alt="Chat with us on Discord!">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
