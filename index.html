@@ -85,23 +85,23 @@
 <span unselectable="on" class="lineno">4  </span>
 <span unselectable="on" class="lineno">5  </span><span class="comment">// It's easy to instrument code:</span>
 <span unselectable="on" class="lineno">6  </span><span class="keyword">fn</span> <span class="ident">process_request</span>() {
-    <span unselectable="on" class="lineno">7  </span>   <span class="ident">counter!</span>(<span class="string">"requests_received"</span>).<span class="ident">increment(<span class="variable">1</span>)</span>;
+<span unselectable="on" class="lineno">7  </span>   <span class="ident">counter!</span>(<span class="string">"requests_received"</span>).<span class="ident">increment(<span class="variable">1</span>)</span>;
 <span unselectable="on" class="lineno">8  </span>
 <span unselectable="on" class="lineno">9  </span>   <span class="keyword">let</span> <span class="variable">start</span> = <span class="type">Instant</span>::<span class="ident">now</span>();
-<span unselectable="on" class="lineno">10 </span>
-<span unselectable="on" class="lineno">11 </span>  <span class="comment">// Do some work here...</span>
-<span unselectable="on" class="lineno">12 </span>
-<span unselectable="on" class="lineno">13 </span>  <span class="ident">histogram!</span>(<span class="string">"process_request_duration"</span>, <span class="variable">start</span>.<span class="ident">elapsed</span>());
-<span unselectable="on" class="lineno">14 </span>}
-<span unselectable="on" class="lineno">15 </span>
-<span unselectable="on" class="lineno">16 </span><span class="comment">// And it's easy to start collecting metrics:</span>
-<span unselectable="on" class="lineno">17 </span><span class="keyword">fn</span> <span class="ident">main</span>() {
-<span unselectable="on" class="lineno">18 </span>   <span class="comment">// Run a Prometheus scrape endpoint on 127.0.0.1:9000.</span>
-<span unselectable="on" class="lineno">19 </span>   <span class="keyword">let</span> <span class="variable">_</span> = <span class="type">PrometheusBuilder</span>::<span class="ident">new</span>()
-<span unselectable="on" class="lineno">20 </span>       .<span class="ident">install</span>()
-<span unselectable="on" class="lineno">21 </span>       .<span class="ident">expect</span>(<span class="string">"failed to install prometheus exporter"</span>);
-<span unselectable="on" class="lineno">22 </span>}
-<span unselectable="on" class="lineno">23 </span><div class="cursor"> </div></div></code><div class="status-line">
+<span unselectable="on" class="lineno">10  </span>
+<span unselectable="on" class="lineno">11  </span>  <span class="comment">// Do some work here...</span>
+<span unselectable="on" class="lineno">12  </span>
+<span unselectable="on" class="lineno">13  </span>  <span class="ident">histogram!</span>(<span class="string">"process_request_duration"</span>).<span class="ident">record</span>(<span class="variable">start</span>.<span class="ident">elapsed</span>());
+<span unselectable="on" class="lineno">14  </span>}
+<span unselectable="on" class="lineno">15  </span>
+<span unselectable="on" class="lineno">16  </span><span class="comment">// And it's easy to start collecting metrics:</span>
+<span unselectable="on" class="lineno">17  </span><span class="keyword">fn</span> <span class="ident">main</span>() {
+<span unselectable="on" class="lineno">18  </span>   <span class="comment">// Run a Prometheus scrape endpoint on 127.0.0.1:9000.</span>
+<span unselectable="on" class="lineno">19  </span>   <span class="keyword">let</span> <span class="variable">_</span> = <span class="type">PrometheusBuilder</span>::<span class="ident">new</span>()
+<span unselectable="on" class="lineno">20  </span>       .<span class="ident">install</span>()
+<span unselectable="on" class="lineno">21  </span>       .<span class="ident">expect</span>(<span class="string">"failed to install prometheus exporter"</span>);
+<span unselectable="on" class="lineno">22  </span>}
+<span unselectable="on" class="lineno">23  </span><div class="cursor"> </div></div></code><div class="status-line">
     <div class="segment flex-shrink mode hi-contrast-bg">NORMAL</div>
     <div class="flexible flex-grow"><div class="segment">src/main.rs</div><div class="segment">rust</div></div>
     <div class="segment flex-shrink lo-contrast-bg">utf-8[unix]</div>
