@@ -80,12 +80,12 @@
                                         <p class="show-for-sr">Here is a code snippet to show how to use the metrics crate both as a library and application author.</p>
                                         <pre>
 <code><div class="editor"><span unselectable="on" class="lineno">1  </span><span class="keyword">use</span> <span class="type">std</span>::<span class="type">time</span>::<span class="type">Instant</span>;
-<span unselectable="on" class="lineno">2  </span><span class="keyword">use</span> <span class="type">metrics</span>::{<span class="ident">increment</span>, <span class="ident">histogram</span>};
+<span unselectable="on" class="lineno">2  </span><span class="keyword">use</span> <span class="type">metrics</span>::{<span class="ident">counter</span>, <span class="ident">histogram</span>};
 <span unselectable="on" class="lineno">3  </span><span class="keyword">use</span> <span class="type">metrics_exporter_prometheus</span>::<span class="type">PrometheusBuilder</span>;
 <span unselectable="on" class="lineno">4  </span>
 <span unselectable="on" class="lineno">5  </span><span class="comment">// It's easy to instrument code:</span>
 <span unselectable="on" class="lineno">6  </span><span class="keyword">fn</span> <span class="ident">process_request</span>() {
-<span unselectable="on" class="lineno">7  </span>   <span class="ident">increment!</span>(<span class="string">"requests_received"</span>);
+    <span unselectable="on" class="lineno">7  </span>   <span class="ident">counter!</span>(<span class="string">"requests_received"</span>).<span class="ident">increment(<span class="variable">1</span>)</span>;
 <span unselectable="on" class="lineno">8  </span>
 <span unselectable="on" class="lineno">9  </span>   <span class="keyword">let</span> <span class="variable">start</span> = <span class="type">Instant</span>::<span class="ident">now</span>();
 <span unselectable="on" class="lineno">10 </span>
